@@ -1,0 +1,51 @@
+<div class = "container mt-5">
+  <h1><strong>Drink of the day: <%= @cocktail.name%></strong>
+    <medium>
+        <%= link_to edit_cocktail_path do %>
+            <i class="fas fa-pencil-alt"></i>
+        <% end %>
+        <%= link_to cocktail_path(@cocktail), method: :delete, data: { confirm: "Are you sure?" } do %>
+            <i class="fas fa-trash-alt"></i>
+        <% end %>
+    </medium>
+  </h1>
+  <br>
+  <div class = "card p-5">
+  <img src="<%= @cocktail.image%>" class="card-img-top" alt="image" style="height: 300px; object-fit: contain;">
+  </div>
+  <br>
+
+  <div class="card">
+    <div class="card-header">
+      <h4> <strong>Description</strong> </h4>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title"><%= @cocktail.description %></h5>
+    </div>
+  </div>
+  <br>
+  
+  <div class="card">
+    <div class="card-body">
+        <h5 class="card-title font-weight-bold">Ingredients
+          <small>
+            <%= link_to new_cocktail_dose_path(@cocktail) do %>
+                <i class="fas fa-pencil-alt"></i>
+            <% end %>
+          </small>
+        </h5>
+        <% @cocktail.doses.each do |dose| %>
+        <p><%=dose.ingredient[:name]%>: <%=dose.description%></p>
+        <%end%>
+    </div>
+  </div>
+  <br>
+
+  <div class="card">
+    <div class="card-body">
+        <h5 class="card-title font-weight-bold">Whats its rating?</h5>
+        <p class="card-text"><%=@cocktail.rating %> out of 5!</p>
+    </div>
+  </div>
+  <br>
+</div>
